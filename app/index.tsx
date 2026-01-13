@@ -1,7 +1,9 @@
 import { CalculatorDisplay } from '@/components/CalculatorDisplay';
 import { CalculatorKeypad } from '@/components/CalculatorKeypad';
+import { ThemedView } from '@/components/themed-view';
 import React, { useState } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 function operate(a: number, b: number, operator: string): number {
   switch (operator) {
@@ -61,17 +63,19 @@ export default function CalculatorScreen() {
   };
 
   return (
-    <View style={styles.container}>
-      <CalculatorDisplay value={display} />
-      <CalculatorKeypad onButtonPress={handleButtonPress} />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <ThemedView style={styles.container}>
+        <CalculatorDisplay value={display} />
+        <CalculatorKeypad onButtonPress={handleButtonPress} />
+      </ThemedView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     justifyContent: 'flex-end',
   },
 });

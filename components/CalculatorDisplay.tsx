@@ -1,5 +1,7 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
+import { ThemedText } from './themed-text';
+import { ThemedView } from './themed-view';
 
 interface CalculatorDisplayProps {
   value: string;
@@ -7,11 +9,11 @@ interface CalculatorDisplayProps {
 
 export const CalculatorDisplay: React.FC<CalculatorDisplayProps> = ({ value }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.displayText} numberOfLines={1} adjustsFontSizeToFit>
+    <ThemedView style={styles.container}>
+      <ThemedText type="title" numberOfLines={1} adjustsFontSizeToFit>
         {value}
-      </Text>
-    </View>
+      </ThemedText>
+    </ThemedView>
   );
 };
 

@@ -1,5 +1,7 @@
+import { useThemeColor } from '@/hooks/use-theme-color';
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet, ViewStyle, TextStyle } from 'react-native';
+import { StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native';
+import { ThemedText } from './themed-text';
 
 interface CalculatorButtonProps {
   title: string;
@@ -9,9 +11,13 @@ interface CalculatorButtonProps {
 }
 
 export const CalculatorButton: React.FC<CalculatorButtonProps> = ({ title, onPress, style, textStyle }) => {
+  // Mendapatkan warna button/text sesuai tema
+  const backgroundColor = useThemeColor({}, 'background');
+  // Butuh perbedaan warna untuk operator/function/number akan tetap dihandle dari parent
+
   return (
-    <TouchableOpacity style={[styles.button, style]} onPress={onPress} activeOpacity={0.7}>
-      <Text style={[styles.text, textStyle]}>{title}</Text>
+    <TouchableOpacity style={[styles.button, { backgroundColor }, style]} onPress={onPress} activeOpacity={0.7}>
+      <ThemedText style={[styles.text, textStyle]}>{title}</ThemedText>
     </TouchableOpacity>
   );
 };
@@ -21,14 +27,14 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 32,
-    backgroundColor: '#ECECEC',
+    // backgroundColor handled by theme
     justifyContent: 'center',
     alignItems: 'center',
     margin: 6,
   },
   text: {
     fontSize: 24,
-    color: '#222',
+    // color: '#222',
     fontWeight: 'bold',
   },
 });
